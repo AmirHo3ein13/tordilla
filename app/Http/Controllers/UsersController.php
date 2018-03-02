@@ -9,6 +9,8 @@ use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 //use Maatwebsite\Excel\Excel;
 
 //class UserListExport extends \Maatwebsite\Excel\Files\NewExcelFile {
@@ -29,10 +31,10 @@ class UsersController extends Controller
      */
     public function sign_in(Request $request){
         if (Auth::attempt([
-            'id' => $request->get('id'),
+            'name' => $request->get('name'),
             'password' => $request->get('password')
         ])){
-            Auth::loginUsingId($request->get('id'),true);
+            Auth::loginUsingId(User::where('name', '=', $request->get('name'))->first()['id'],true);
             return json_encode([
                 'code' => Auth::user()['code'],
                 'role' => Role::findOrFail(Auth::user()['role'])->role,
