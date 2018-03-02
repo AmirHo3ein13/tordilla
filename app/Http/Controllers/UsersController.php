@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+//use Maatwebsite\Excel\Excel;
 
+//class UserListExport extends \Maatwebsite\Excel\Files\NewExcelFile {
+//
+//    public function getFilename()
+//    {
+//        return 'filename';
+//    }
+//}
 class UsersController extends Controller
 {
     use AuthenticatesUsers;
@@ -23,7 +33,10 @@ class UsersController extends Controller
             'password' => $request->get('password')
         ])){
             Auth::loginUsingId($request->get('id'),true);
-            return json_encode(true);
+            return json_encode([
+                'code' => Auth::user()['code'],
+                'role' => Role::findOrFail(Auth::user()['role'])->role,
+            ]);
         }
         else{
             return json_encode(false);
@@ -50,4 +63,12 @@ class UsersController extends Controller
         Auth::logout();
         return 'logged out';
     }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+//    public function load(Request $request){
+//
+//    }
 }
