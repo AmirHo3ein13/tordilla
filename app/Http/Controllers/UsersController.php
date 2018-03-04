@@ -9,6 +9,7 @@ use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use League\Csv\Reader;
 
 //use Maatwebsite\Excel\Excel;
 
@@ -69,4 +70,27 @@ class UsersController extends Controller
      * @param Request $request
      * @return string
      */
+    public function load(Request $request){
+        $csv = Reader::createFromPath(public_path('test-list-foroosh.csv'));
+        $arr = array();
+        foreach ($csv as $item) {
+            array_push($arr, array_slice($item, 0, 6));
+        }
+        $roles = [
+            'مدیر فروش' => 2,
+            'سرپرست فروش' => 3,
+            'بازاریاب' => 4,
+            'مدیر سیستم' => 1,
+        ];
+        foreach (array_slice($arr, 3) as $row){
+            User::create([
+                'code' => $row[0],
+                'first_last_name' => $row[1],
+                'password' => $row[0],
+                'name' => $row[3],
+                'role' => $roles[$row[2]],
+            ]);
+        }
+        return json_encode(true);
+    }
 }
