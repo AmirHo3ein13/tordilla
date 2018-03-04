@@ -9,7 +9,6 @@ use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 //use Maatwebsite\Excel\Excel;
 
@@ -70,7 +69,4 @@ class UsersController extends Controller
      * @param Request $request
      * @return string
      */
-//    public function load(Request $request){
-//
-//    }
 }

@@ -18,8 +18,8 @@ class CreateCustomersTable extends Migration
             $table->geometry('location')->nullable();
             $table->string('code', 20);
             $table->string('store_name');
-            $table->string('city');
-            $table->string('area');
+            $table->string('city')->nullable();
+            $table->string('area')->nullable();
             $table->text('address');
             $table->string('phone', 14);
             $table->timestamps();
