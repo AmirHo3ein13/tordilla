@@ -47,3 +47,4 @@ Route::post('/customer/get/{id?}', 'CustomersController@get')->middleware('login
 Route::post('/customer/location/add', 'CustomersController@add_location')->middleware('login');
 Route::post('/customer/add-data', 'CustomersController@load')->middleware('login', 'admin');
 
+Route::post('/test', 'TestController@test');
