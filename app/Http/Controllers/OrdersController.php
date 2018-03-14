@@ -55,18 +55,27 @@ class OrdersController extends Controller
                 ['marketer_id', '=', $request->get('marketer')],
                 ['submit_datetime', '>=', $request->get('start_datetime')],
                 ['submit_datetime', '<=', $request->get('end_datetime')],
-            ])->get());
+            ])
+                ->offset($request->get('index_from'))
+                ->limit($request->get('index_to') - $request->get('index_from'))
+                ->get());
         }
         else if ($request->has('marketer')) {
             return json_encode(Order::where([
                 ['marketer_id', '=', $request->get('marketer')],
-            ])->get());
+            ])
+                ->offset($request->get('index_from'))
+                ->limit($request->get('index_to') - $request->get('index_from'))
+                ->get());
         }
         else if ($request->has('start_datetime')) {
             return json_encode(Order::where([
                 ['submit_datetime', '>=', $request->get('start_datetime')],
                 ['submit_datetime', '<=', $request->get('end_datetime')],
-            ])->get());
+            ])
+                ->offset($request->get('index_from'))
+                ->limit($request->get('index_to') - $request->get('index_from'))
+                ->get());
         }
         else {
             return json_encode(Order::all());
