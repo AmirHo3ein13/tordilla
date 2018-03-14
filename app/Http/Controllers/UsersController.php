@@ -86,7 +86,7 @@ class UsersController extends Controller
             User::create([
                 'code' => $row[0],
                 'first_last_name' => $row[1],
-                'password' => $row[0],
+                'password' => bcrypt($row[0]),
                 'name' => $row[3],
                 'role' => $roles[$row[2]],
             ]);
