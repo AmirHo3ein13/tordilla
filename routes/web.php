@@ -42,7 +42,7 @@ Route::post('/order/location/add', 'OrdersController@add_location')->middleware(
 Route::post('/marketer/add', 'MarketersController@add')->middleware('login', 'admin');
 Route::post('/marketer/get/{id?}', 'MarketersController@get')->middleware('login');
 
-Route::post('/customer/add', 'CustomersController@add')->middleware('login', 'admin');
+Route::post('/customer/add', 'CustomersController@add')->middleware('login');
 Route::post('/customer/get/{id?}', 'CustomersController@get')->middleware('login');
 Route::post('/customer/location/add', 'CustomersController@add_location')->middleware('login');
 //Route::post('/customer/add-data', 'CustomersController@load')->middleware('login', 'admin');
