@@ -9,9 +9,9 @@ use League\Csv\Reader;
 class CustomersController extends Controller
 {
     public function add(Request $request){
-        $location = $request->has('location') ? $request->get('location') : null;
         return Customer::create([
-            'location' => $location,
+            'latitude' => $request->has('latitude') ? $request->get('latitude') : null,
+            'longitude' => $request->has('longitude') ? $request->get('longitude') : null,
             'code' => $request->get('code'),
             'store_name' => $request->get('store_name'),
             'city' => $request->get('city'),
@@ -28,7 +28,8 @@ class CustomersController extends Controller
     }
     public function add_location(Request $request){
         $customer = Customer::findOrFail($request->get('id'));
-        $customer['location'] = $request->get('location');
+        $customer['latitude'] = $request->get('latitude');
+        $customer['longitude'] = $request->get('longitude');
         return json_encode(true);
     }
 

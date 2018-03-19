@@ -12,7 +12,6 @@ class OrdersController extends Controller
      * @return mixed
      */
     public function add(Request $request){
-        $location = $request->has('location') ? $request->get('location') : null;
         return Order::create([
             'customer_id' => $request->get('customer_id'),
             'marketer_id' => $request->get('marketer_id'),
@@ -20,7 +19,8 @@ class OrdersController extends Controller
             'amount' => $request->get('amount'),
             'discount' => $request->get('discount'),
             'submit_date' => $request->get('submit_date'),
-            'location' => $location,
+            'latitude' => $request->has('latitude') ? $request->get('latitude') : null,
+            'longitude' => $request->has('longitude') ? $request->get('longitude') : null,
         ]);
     }
 
@@ -41,7 +41,8 @@ class OrdersController extends Controller
      */
     public function add_location(Request $request){
         $order = Order::findOrFail($request->get('id'));
-        $order['location'] = $request->get('location');
+        $order['latitude'] = $request->get('latitude');
+        $order['longitude'] = $request->get('longitude');
         return json_encode(true);
     }
 

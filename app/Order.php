@@ -14,7 +14,8 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'customer_id', 'marketer_id', 'order_details', 'amount', 'discount', 'submit_datetime', 'location'
+        'customer_id', 'marketer_id', 'order_details',
+        'amount', 'discount', 'submit_datetime', 'latitude', 'longitude'
     ];
 
     protected $table = 'orders';
