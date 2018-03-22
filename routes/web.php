@@ -28,6 +28,7 @@ Route::post('/role/get/{id?}', 'RolesController@get')->middleware( 'login', 'adm
 
 Route::post('/product/add', 'ProductsController@add')->middleware('login', 'admin');
 Route::post('/product/get/{id?}', 'ProductsController@get')->middleware('login');
+Route::post('/product/get_image/{id}', 'ProductsController@get_image')->middleware('login');
 
 Route::post('/product-category/add', 'ProductCategoriesController@add')->middleware('login', 'admin');
 Route::post('/product-category/get/{id?}', 'ProductCategoriesController@get')->middleware('login');

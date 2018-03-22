@@ -10,7 +10,7 @@ class ProductsController extends Controller
     public function add(Request $request){
         return Product::create([
             'name' => $request->get('name'),
-            'image' => $request->get('image'),
+            'image' => $request->file('image')->store('product_image'),
             'code' => $request->get('code'),
             'category' => $request->get('category'),
             'number_in_box' => $request->get('number_in_box'),
@@ -23,5 +23,8 @@ class ProductsController extends Controller
             return json_encode(Product::all());
         else
             return json_encode(Product::findOrFail($id));
+    }
+    public function get_image($id){
+        return response()->file(public_path('storage/'.Product::findOfFail($id)['image']));
     }
 }
