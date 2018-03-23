@@ -44,6 +44,9 @@ Route::post('/accountant/get/{id?}', 'AccountantsController@get')->middleware('l
 
 Route::post('/order/add', 'OrdersController@add')->middleware('login');
 Route::post('/order/get/{id?}', 'OrdersController@get')->middleware('login');
+Route::post('/order/update/{id}', 'OrdersController@update')->middleware('login');
+Route::post('/order/delete/{id}', 'OrdersController@delete')->middleware('login');
+Route::post('/order/edit/step/{id}', 'OrdersController@change_step')->middleware('login');
 Route::post('/order/get/filter', 'OrdersController@filter')->middleware('login');
 Route::post('/order/location/add', 'OrdersController@add_location')->middleware('login');
 

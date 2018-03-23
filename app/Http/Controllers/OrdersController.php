@@ -86,4 +86,48 @@ class OrdersController extends Controller
             return json_encode(Order::all());
         }
     }
+
+    public function change_step($id, Request $request){
+        $order = Order::findOrFail($id);
+        if ($order->step == 0){
+            if ($request->exists('driver')){
+                $order->driver = $request->get('driver');
+                $order->step++;
+                $order->save();
+            }
+            else
+                abort(500);
+        }
+        elseif ($order->step == 1){
+            if ($request->exists('factor')){
+                $order->factor_number = $request->get('factor');
+                $order->step++;
+                $order->save();
+            }
+            else
+                abort(500);
+        }
+        return json_encode(true);
+    }
+
+    public function delete($id){
+        Order::destroy($id);
+        return json_encode(true);
+    }
+
+    public function update($id, Request $request){
+        $order = Order::findOrFail($id);
+        $order->customer_id = $request->get('customer_id');
+        $order->marketer_id = $request->get('marketer_id');
+        $order->order_details = $request->get('order_details');
+        $order->amount = $request->get('amount');
+        $order->discount = $request->get('discount');
+        $order->submit_date = $request->get('submit_date');
+        $order->latitude = $request->has('latitude') ? $request->get('latitude') : null;
+        $order->longitude = $request->has('longitude') ? $request->get('longitude') : null;
+
+        $order->save();
+
+        return json_encode($order);
+    }
 }
