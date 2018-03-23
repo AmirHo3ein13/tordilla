@@ -23,4 +23,16 @@ class RolesController extends Controller
         else
             return json_encode(Role::findOrFail($id));
     }
+
+    public function delete($id){
+        Role::destroy($id);
+        return json_encode(true);
+    }
+
+    public function update($id, Request $request){
+        $role = Role::find($id);
+        $role->name = $request->get('name');
+        $role->save();
+        return json_encode($role);
+    }
 }

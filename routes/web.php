@@ -25,6 +25,8 @@ Route::post('/sign-out', 'UsersController@sign_out');
 
 Route::post('/role/add', 'RolesController@add')->middleware('login', 'admin');
 Route::post('/role/get/{id?}', 'RolesController@get')->middleware( 'login', 'admin');
+Route::post('/role/delete/{id}', 'RolesController@delete')->middleware( 'login', 'admin');
+Route::post('/role/update/{id}', 'RolesController@delete')->middleware( 'login', 'admin');
 
 Route::post('/product/add', 'ProductsController@add')->middleware('login', 'admin');
 Route::post('/product/get/{id?}', 'ProductsController@get')->middleware('login');
@@ -38,6 +40,7 @@ Route::post('/accountant/get/{id?}', 'AccountantsController@get')->middleware('l
 
 Route::post('/order/add', 'OrdersController@add')->middleware('login');
 Route::post('/order/get/{id?}', 'OrdersController@get')->middleware('login');
+Route::post('/order/get/filter', 'OrdersController@filter')->middleware('login');
 Route::post('/order/location/add', 'OrdersController@add_location')->middleware('login');
 
 Route::post('/marketer/add', 'MarketersController@add')->middleware('login', 'admin');
