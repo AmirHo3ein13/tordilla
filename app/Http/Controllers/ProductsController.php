@@ -3,22 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\ProductCategory;
 use Illuminate\Http\Request;
 use Whoops\Handler\PrettyPageHandler;
 
 class ProductsController extends Controller
 {
     public function add(Request $request){
-        return Product::create([
-            'name' => $request->get('name'),
-            'image' => $request->file('image')->store('product_image'),
-            'code' => $request->get('code'),
-            'category_id' => $request->get('category'),
-            'number_in_box' => $request->get('number_in_box'),
-            'price' => $request->get('price'),
-            'box_price' => $request->get('box_price'),
-            'inventory' => $request->get('inventory'),
-            'reservation_inventory' => $request->get('reservation_inventory'),
+        return json_encode([
+            Product::create([
+                'name' => $request->get('name'),
+                'image' => $request->file('image')->store('product_image'),
+                'code' => $request->get('code'),
+                'category_id' => $request->get('category'),
+                'number_in_box' => $request->get('number_in_box'),
+                'price' => $request->get('price'),
+                'box_price' => $request->get('box_price'),
+                'inventory' => $request->get('inventory'),
+                'reservation_inventory' => $request->get('reservation_inventory'),
+            ]),
+            ProductCategory::findOrFail($request->get('category'))
         ]);
     }
     public function get($id = -1){
