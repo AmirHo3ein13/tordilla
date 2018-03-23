@@ -55,4 +55,9 @@ Route::post('/customer/get/{id?}', 'CustomersController@get')->middleware('login
 Route::post('/customer/location/add', 'CustomersController@add_location')->middleware('login');
 //Route::post('/customer/add-data', 'CustomersController@load')->middleware('login', 'admin');
 
+Route::post('/driver/add', 'DriversController@add')->middleware('login', 'admin');
+Route::post('/driver/get/{id?}', 'DriversController@get')->middleware( 'login', 'admin');
+Route::post('/driver/delete/{id}', 'DriversController@delete')->middleware( 'login', 'admin');
+Route::post('/driver/update/{id}', 'DriversController@update')->middleware( 'login', 'admin');
+
 Route::post('/test', 'TestController@test');
