@@ -15,7 +15,8 @@ class Order extends Model
 {
     protected $fillable = [
         'customer_id', 'marketer_id', 'order_details',
-        'amount', 'discount', 'submit_datetime', 'latitude', 'longitude'
+        'amount', 'discount', 'submit_datetime', 'latitude', 'longitude',
+        'step', 'driver', 'factor_number'
     ];
 
     protected $table = 'orders';
@@ -26,6 +27,10 @@ class Order extends Model
 
     public function marketer(){
         return $this->hasOne(Marketer::class);
+    }
+
+    public function driver(){
+        return $this->hasOne(Driver::class);
     }
 
 }
