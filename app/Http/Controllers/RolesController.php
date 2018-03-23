@@ -31,7 +31,7 @@ class RolesController extends Controller
 
     public function update($id, Request $request){
         $role = Role::find($id);
-        $role->name = $request->get('name');
+        $role->role = $request->get('name');
         $role->save();
         return json_encode($role);
     }
