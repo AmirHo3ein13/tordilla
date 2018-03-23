@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use App\Order;
 use Illuminate\Http\Request;
 
@@ -12,15 +13,18 @@ class OrdersController extends Controller
      * @return mixed
      */
     public function add(Request $request){
-        return Order::create([
-            'customer_id' => $request->get('customer_id'),
-            'marketer_id' => $request->get('marketer_id'),
-            'order_details' => $request->get('order_details'),
-            'amount' => $request->get('amount'),
-            'discount' => $request->get('discount'),
-            'submit_date' => $request->get('submit_date'),
-            'latitude' => $request->has('latitude') ? $request->get('latitude') : null,
-            'longitude' => $request->has('longitude') ? $request->get('longitude') : null,
+        return json_encode([
+            Order::create([
+                'customer_id' => $request->get('customer_id'),
+                'marketer_id' => $request->get('marketer_id'),
+                'order_details' => $request->get('order_details'),
+                'amount' => $request->get('amount'),
+                'discount' => $request->get('discount'),
+                'submit_date' => $request->get('submit_date'),
+                'latitude' => $request->has('latitude') ? $request->get('latitude') : null,
+                'longitude' => $request->has('longitude') ? $request->get('longitude') : null,
+            ]),
+                Customer::findOrFail($request->get('customer_id'))
         ]);
     }
 
