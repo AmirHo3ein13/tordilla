@@ -26,10 +26,14 @@ Route::post('/sign-out', 'UsersController@sign_out');
 Route::post('/role/add', 'RolesController@add')->middleware('login', 'admin');
 Route::post('/role/get/{id?}', 'RolesController@get')->middleware( 'login', 'admin');
 Route::post('/role/delete/{id}', 'RolesController@delete')->middleware( 'login', 'admin');
-Route::post('/role/update/{id}', 'RolesController@delete')->middleware( 'login', 'admin');
+Route::post('/role/update/{id}', 'RolesController@update')->middleware( 'login', 'admin');
 
 Route::post('/product/add', 'ProductsController@add')->middleware('login', 'admin');
 Route::post('/product/get/{id?}', 'ProductsController@get')->middleware('login');
+Route::post('/product/delete/{id}', 'ProductsController@delete')->middleware('login');
+Route::post('/product/update/{id}', 'ProductsController@update')->middleware('login');
+Route::post('/product/edit/inventory/{id}', 'ProductsController@edit_inventory')->middleware('login');
+Route::post('/product/edit/reservation_inventory/{id}', 'ProductsController@edit_reservation_inventory')->middleware('login');
 Route::post('/product/get_image/{id}', 'ProductsController@get_image')->middleware('login');
 
 Route::post('/product-category/add', 'ProductCategoriesController@add')->middleware('login', 'admin');

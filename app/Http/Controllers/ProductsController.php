@@ -54,8 +54,17 @@ class ProductsController extends Controller
         return json_encode(true);
     }
 
-    public function edit_inventory($id){
-
+    public function edit_inventory($id, Request $request){
+        $product = Product::findOrFail($id);
+        $product->inventory += $request->get('amount');
+        $product->save();
+        return json_encode($product);
     }
-    public function edit_reservation_inventory($id){}
+
+    public function edit_reservation_inventory($id, Request $request){
+        $product = Product::findOrFail($id);
+        $product->reservation_inventory += $request->get('amount');
+        $product->save();
+        return json_encode($product);
+    }
 }
