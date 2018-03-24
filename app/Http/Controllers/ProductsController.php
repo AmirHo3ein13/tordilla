@@ -32,7 +32,7 @@ class ProductsController extends Controller
             return json_encode(Product::findOrFail($id));
     }
     public function get_image($id){
-        return response()->file(public_path('storage/'.Product::findOfFail($id)['image']));
+        return response()->file(public_path('storage/'.Product::findOrFail($id)['image']));
     }
 
     public function update($id, Request $request){
@@ -40,7 +40,7 @@ class ProductsController extends Controller
         $product->name = $request->get('name');
         $product->image = $request->file('image')->store('product_image');
         $product->code = $request->get('code');
-        $product->category = $request->get('category');
+        $product->category_id = $request->get('category');
         $product->number_in_box = $request->get('number_in_box');
         $product->price = $request->get('price');
         $product->box_price = $request->get('box_price');
