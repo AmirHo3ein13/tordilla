@@ -38,10 +38,13 @@ Route::post('/product/get_image/{id}', 'ProductsController@get_image')->middlewa
 
 Route::post('/product-category/add', 'ProductCategoriesController@add')->middleware('login', 'admin');
 Route::post('/product-category/get/{id?}', 'ProductCategoriesController@get')->middleware('login');
-#TODO: update and delete
+Route::post('/product-category/update/{id}', 'ProductCategoriesController@update')->middleware('login', 'admin');
+Route::post('/product-category/delete/{id}', 'ProductCategoriesController@delete')->middleware('login', 'admin');
 
 Route::post('/accountant/add', 'AccountantsController@add')->middleware('login', 'admin');
 Route::post('/accountant/get/{id?}', 'AccountantsController@get')->middleware('login');
+//Route::post('/accountant/update/{id}', 'AccountantsController@update')->middleware('login', 'admin');
+//Route::post('/accountant/delete{id}', 'AccountantsController@delete')->middleware('login', 'admin');
 #TODO: update and delete
 
 Route::post('/order/add', 'OrdersController@add')->middleware('login');

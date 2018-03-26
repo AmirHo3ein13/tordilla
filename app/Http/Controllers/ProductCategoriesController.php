@@ -18,4 +18,19 @@ class ProductCategoriesController extends Controller
         else
             return json_encode(ProductCategory::findOrFail($id));
     }
+
+    public function update($id, Request $request){
+        $pc = ProductCategory::findOrFail($id);
+
+        $pc->name = $request->get('name');
+        $pc->save();
+
+        return json_encode($pc);
+    }
+
+    public function delete($id){
+        ProductCategory::destroy($id);
+
+        return json_encode(true);
+    }
 }
