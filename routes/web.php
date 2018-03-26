@@ -56,7 +56,8 @@ Route::post('/order/location/add', 'OrdersController@add_location')->middleware(
 
 Route::post('/marketer/add', 'MarketersController@add')->middleware('login', 'admin');
 Route::post('/marketer/get/{id?}', 'MarketersController@get')->middleware('login');
-#TODO: update and delete
+Route::post('/marketer/update/{id}', 'MarketersController@add')->middleware('login', 'admin');
+Route::post('/marketer/delete/{id}', 'MarketersController@add')->middleware('login', 'admin');
 
 Route::post('/customer/add', 'CustomersController@add')->middleware('login');
 Route::post('/customer/get/{id?}', 'CustomersController@get')->middleware('login');

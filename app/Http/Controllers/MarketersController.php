@@ -21,4 +21,23 @@ class MarketersController extends Controller
         else
             return json_encode(Marketer::findOrFail($id));
     }
+
+    public function update($id, Request $request){
+        $marketer = Marketer::findOrFail($id);
+
+        $marketer->user_id = $request->get('user_id');
+        $marketer->code = $request->get('code');
+        $marketer->status = $request->get('status');
+        $marketer->phone = $request->get('phone');
+
+        $marketer->save();
+
+        return json_encode($marketer);
+    }
+
+    public function delete($id){
+        Marketer::destroy($id);
+
+        return json_encode(true);
+    }
 }
