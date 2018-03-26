@@ -38,25 +38,29 @@ Route::post('/product/get_image/{id}', 'ProductsController@get_image')->middlewa
 
 Route::post('/product-category/add', 'ProductCategoriesController@add')->middleware('login', 'admin');
 Route::post('/product-category/get/{id?}', 'ProductCategoriesController@get')->middleware('login');
+#TODO: update and delete
 
 Route::post('/accountant/add', 'AccountantsController@add')->middleware('login', 'admin');
 Route::post('/accountant/get/{id?}', 'AccountantsController@get')->middleware('login');
+#TODO: update and delete
 
 Route::post('/order/add', 'OrdersController@add')->middleware('login');
 Route::post('/order/get/{id?}', 'OrdersController@get')->middleware('login');
 Route::post('/order/update/{id}', 'OrdersController@update')->middleware('login');
 Route::post('/order/delete/{id}', 'OrdersController@delete')->middleware('login');
 Route::post('/order/edit/step/{id}', 'OrdersController@change_step')->middleware('login');
-Route::post('/order/get/filter', 'OrdersController@filter')->middleware('login');
+Route::post('/order/filter', 'OrdersController@filter');
 Route::post('/order/location/add', 'OrdersController@add_location')->middleware('login');
 
 Route::post('/marketer/add', 'MarketersController@add')->middleware('login', 'admin');
 Route::post('/marketer/get/{id?}', 'MarketersController@get')->middleware('login');
+#TODO: update and delete
 
 Route::post('/customer/add', 'CustomersController@add')->middleware('login');
 Route::post('/customer/get/{id?}', 'CustomersController@get')->middleware('login');
 Route::post('/customer/location/add', 'CustomersController@add_location')->middleware('login');
 //Route::post('/customer/add-data', 'CustomersController@load')->middleware('login', 'admin');
+#TODO: update and delete
 
 Route::post('/driver/add', 'DriversController@add')->middleware('login', 'admin');
 Route::post('/driver/get/{id?}', 'DriversController@get')->middleware( 'login', 'admin');
