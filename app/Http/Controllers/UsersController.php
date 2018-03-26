@@ -38,7 +38,11 @@ class UsersController extends Controller
             return json_encode([
                 'code' => Auth::user()['code'],
                 'role' => Role::findOrFail(Auth::user()['role'])->role,
+                'role_id' => Auth::user()['role'],
                 'id' => Auth::user()['id'],
+                'name' => Auth::user()['name'],
+                'email' => Auth::user()['email'],
+                'first_last_name' => Auth::user()['first_last_name'],
             ]);
         }
         else{
