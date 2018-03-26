@@ -53,4 +53,27 @@ class CustomersController extends Controller
         }
         return json_encode(true);
     }
+
+    public function update($id, Request $request){
+        $customer = Customer::findOrFail($id);
+
+        $customer->latitude = $request->has('latitude') ? $request->get('latitude') : null;
+        $customer->longitude = $request->has('longitude') ? $request->get('longitude') : null;
+        $customer->code = $request->get('code');
+        $customer->store_name = $request->get('store_name');
+        $customer->city = $request->get('city');
+        $customer->area = $request->get('area');
+        $customer->address = $request->get('address');
+        $customer->phone = $request->get('phone');
+
+        $customer->save();
+
+        return json_encode($customer);
+    }
+
+    public function delete($id){
+        Customer::destroy($id);
+
+        return json_encode(true);
+    }
 }
