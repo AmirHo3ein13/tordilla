@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
@@ -58,25 +59,25 @@ class OrdersController extends Controller
         if ($request->has('marketer') and $request->has('start_datetime')){
             return json_encode(Order::where([
                 ['marketer_id', '=', $request->get('marketer')],
-                ['submit_datetime', '>=', $request->get('start_datetime')],
-                ['submit_datetime', '<=', $request->get('end_datetime')],
+                ['created_at', '>=', $request->get('start_datetime')],
+                ['created_at', '<=', $request->get('end_datetime')],
             ])
                 ->offset($request->get('index_from'))
                 ->limit($request->get('index_to') - $request->get('index_from'))
                 ->get());
         }
         else if ($request->has('marketer')) {
-            return json_encode(Order::where([
-                ['marketer_id', '=', $request->get('marketer')],
-            ])
+            return json_encode(Order::where(
+                [['marketer_id', '=', $request->get('marketer')],]
+            )->limit($request->get('index_to') - $request->get('index_from'))
                 ->offset($request->get('index_from'))
-                ->limit($request->get('index_to') - $request->get('index_from'))
-                ->get());
+                ->get()
+            );
         }
         else if ($request->has('start_datetime')) {
             return json_encode(Order::where([
-                ['submit_datetime', '>=', $request->get('start_datetime')],
-                ['submit_datetime', '<=', $request->get('end_datetime')],
+                ['created_at', '>=', $request->get('start_datetime')],
+                ['created_at', '<=', $request->get('end_datetime')],
             ])
                 ->offset($request->get('index_from'))
                 ->limit($request->get('index_to') - $request->get('index_from'))
