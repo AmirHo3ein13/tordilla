@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/sign-in', 'UsersController@sign_in');
 Route::post('/sign-up', 'UsersController@register')->middleware('admin');
 Route::post('/sign-out', 'UsersController@sign_out');
+Route::post('/user/get', 'UsersController@get')->middleware('admin');
 //Route::post('/user/add-data', 'UsersController@load')->middleware('admin');
 
 Route::post('/role/add', 'RolesController@add')->middleware('login', 'admin');
@@ -55,7 +56,7 @@ Route::post('/order/filter', 'OrdersController@filter');
 Route::post('/order/location/add', 'OrdersController@add_location')->middleware('login');
 
 Route::post('/marketer/add', 'MarketersController@add')->middleware('login', 'admin');
-Route::post('/marketer/get/{id?}', 'MarketersController@get')->middleware('login');
+Route::post('/marketer/geti/{id?}', 'MarketersController@get')->middleware('login');
 Route::post('/marketer/update/{id}', 'MarketersController@update')->middleware('login', 'admin');
 Route::post('/marketer/delete/{id}', 'MarketersController@delete')->middleware('login', 'admin');
 
