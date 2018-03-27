@@ -99,7 +99,7 @@ class UsersController extends Controller
         return json_encode(true);
     }
 
-    public function users($id = -1){
+    public function get($id = -1){
         if ($id == -1){
             return User::all();
         }
