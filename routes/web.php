@@ -36,6 +36,7 @@ Route::post('/product/update/{id}', 'ProductsController@update')->middleware('lo
 Route::post('/product/edit/inventory/{id}', 'ProductsController@edit_inventory')->middleware('login');
 Route::post('/product/edit/reservation_inventory/{id}', 'ProductsController@edit_reservation_inventory')->middleware('login');
 Route::post('/product/get_image/{id}', 'ProductsController@get_image')->middleware('login');
+Route::post('/product/get_image_path', 'ProductsController@get_image_path')->middleware('login');
 
 Route::post('/product-category/add', 'ProductCategoriesController@add')->middleware('login', 'admin');
 Route::post('/product-category/get/{id?}', 'ProductCategoriesController@get')->middleware('login');
