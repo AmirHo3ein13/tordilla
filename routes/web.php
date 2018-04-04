@@ -65,6 +65,7 @@ Route::post('/customer/get/{id?}', 'CustomersController@get')->middleware('login
 Route::post('/customer/location/add', 'CustomersController@add_location')->middleware('login');
 Route::post('/customer/update/{id}', 'CustomersController@update')->middleware('login');
 Route::post('/customer/delete/{id}', 'CustomersController@delete')->middleware('login');
+Route::post('/customer/search', 'CustomersController@search')->middleware('login');
 //Route::post('/customer/add-data', 'CustomersController@load')->middleware('login', 'admin');
 
 Route::post('/driver/add', 'DriversController@add')->middleware('login', 'admin');

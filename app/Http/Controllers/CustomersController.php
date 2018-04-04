@@ -76,4 +76,21 @@ class CustomersController extends Controller
 
         return json_encode(true);
     }
+
+    public function search(Request $request){
+        $customers = Customer::all();
+        if ($request->get('store_name')){
+            $customers = $customers->where('store_name' , '=', $request->get('store_name'));
+        }
+        if ($request->get('code')){
+            $customers = $customers->where('code' , '=', $request->get('code'));
+        }
+        if ($request->get('phone')){
+            $customers = $customers->where('phone' , '=', $request->get('phone'));
+        }
+        if ($request->get('city')){
+            $customers = $customers->where('city' , '=', $request->get('city'));
+        }
+        return json_encode($customers->all());
+    }
 }
