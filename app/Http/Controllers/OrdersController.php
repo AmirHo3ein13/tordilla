@@ -14,7 +14,7 @@ class OrdersController extends Controller
      * @return mixed
      */
     public function add(Request $request){
-        return json_encode([
+        return json_encode(
             Order::create([
                 'customer_id' => $request->get('customer_id'),
                 'marketer_id' => $request->get('marketer_id'),
@@ -24,9 +24,8 @@ class OrdersController extends Controller
                 'submit_date' => $request->get('submit_date'),
                 'latitude' => $request->has('latitude') ? $request->get('latitude') : null,
                 'longitude' => $request->has('longitude') ? $request->get('longitude') : null,
-            ]),
-                Customer::findOrFail($request->get('customer_id'))
-        ]);
+            ])
+        );
     }
 
     /**
