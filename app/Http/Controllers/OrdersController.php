@@ -62,6 +62,7 @@ class OrdersController extends Controller
                 ['created_at', '>=', $request->get('start_datetime')],
                 ['created_at', '<=', $request->get('end_datetime')],
             ])
+                ->orderBy('created_at', 'desc')
                 ->offset($request->get('index_from'))
                 ->limit($request->get('index_to') - $request->get('index_from'))
                 ->get());
@@ -69,7 +70,9 @@ class OrdersController extends Controller
         else if ($request->has('marketer')) {
             return json_encode(Order::where(
                 [['marketer_id', '=', $request->get('marketer')],]
-            )->limit($request->get('index_to') - $request->get('index_from'))
+            )
+                ->orderBy('created_at', 'desc')
+                ->limit($request->get('index_to') - $request->get('index_from'))
                 ->offset($request->get('index_from'))
                 ->get()
             );
@@ -79,6 +82,7 @@ class OrdersController extends Controller
                 ['created_at', '>=', $request->get('start_datetime')],
                 ['created_at', '<=', $request->get('end_datetime')],
             ])
+                ->orderBy('created_at', 'desc')
                 ->offset($request->get('index_from'))
                 ->limit($request->get('index_to') - $request->get('index_from'))
                 ->get());
