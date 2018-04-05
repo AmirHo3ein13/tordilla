@@ -80,7 +80,7 @@ class CustomersController extends Controller
     public function search(Request $request){
         $customers = Customer::all();
         if ($request->get('store_name')){
-            $customers = $customers->where('store_name' , '=', $request->get('store_name'));
+            $customers = $customers->where('store_name' , 'like', '%'.$request->get('store_name').'%');
         }
         if ($request->get('code')){
             $customers = $customers->where('code' , '=', $request->get('code'));
@@ -90,6 +90,16 @@ class CustomersController extends Controller
         }
         if ($request->get('city')){
             $customers = $customers->where('city' , '=', $request->get('city'));
+        }
+        if ($request->get('longitude')){
+            $customers = $customers->whereBetween('longitude' , [$request->get('longitude') - 0.002, $request->get('longitude') + 0.002]);
+        }
+        if ($request->get('latitude')){
+            $customers = $customers->whereBetween('latitude' , [$request->get('latitude') - 0.002, $request->get('latitude') + 0.002]);
+        }
+        if ($request->get('index_from') and $request->get('index_to')){
+            $customers = $customers->offset($request->get('index_from'))
+                ->limit($request->get('index_to') - $request->get('index_from'));
         }
         return json_encode($customers->all());
     }
