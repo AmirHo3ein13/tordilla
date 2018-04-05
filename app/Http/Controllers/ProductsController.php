@@ -35,8 +35,8 @@ class ProductsController extends Controller
         return response()->file(public_path('storage/'.Product::findOrFail($id)['image']));
     }
 
-    public function get_image_path(Request $request){
-        return response()->file(public_path('storage/'.$request->get('path')));
+    public function get_image_path($folder, $filename){
+        return response()->file(public_path('storage/'.explode('\\', $folder)[0].'\\/'.$filename));
     }
 
     public function update($id, Request $request){
