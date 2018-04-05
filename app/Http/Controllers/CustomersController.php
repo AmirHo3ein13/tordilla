@@ -80,16 +80,16 @@ class CustomersController extends Controller
     public function search(Request $request){
         $customers = Customer::all();
         if ($request->get('store_name')){
-            $customers = $customers->where('store_name' , 'like', '%'.$request->get('store_name').'%');
+            $customers = $customers->where('store_name' , 'like', '%\''.$request->get('store_name').'\'%');
         }
         if ($request->get('code')){
-            $customers = $customers->where('code' , 'like', '%'.$request->get('code').'%');
+            $customers = $customers->where('code' , 'like', '%\''.$request->get('code').'\'%');
         }
         if ($request->get('phone')){
-            $customers = $customers->where('phone' , 'like', '%'.$request->get('phone').'%');
+            $customers = $customers->where('phone' , 'like', '%\''.$request->get('phone').'\'%');
         }
         if ($request->get('city')){
-            $customers = $customers->where('city' , 'like', '%'.$request->get('city').'%');
+            $customers = $customers->where('city' , 'like', '%\''.$request->get('city').'\'%');
         }
         if ($request->get('longitude')){
             $customers = $customers->whereBetween('longitude' , [$request->get('longitude') - 0.002, $request->get('longitude') + 0.002]);
