@@ -55,40 +55,22 @@ class OrdersController extends Controller
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function filter(Request $request){
-        if ($request->has('marketer') and $request->has('start_datetime')){
-            return json_encode(Order::where([
-                ['marketer_id', '=', $request->get('marketer')],
-                ['created_at', '>=', $request->get('start_datetime')],
-                ['created_at', '<=', $request->get('end_datetime')],
-            ])
-                ->orderBy('created_at', 'desc')
-                ->offset($request->get('index_from'))
-                ->limit($request->get('index_to') - $request->get('index_from'))
-                ->get());
+        $orders = Order::all();
+        if ($request->has('marketer')){
+            $orders = $orders->where('marketer_id', '=', $request->get('marketer'));
         }
-        else if ($request->has('marketer')) {
-            return json_encode(Order::where(
-                [['marketer_id', '=', $request->get('marketer')],]
-            )
-                ->orderBy('created_at', 'desc')
-                ->limit($request->get('index_to') - $request->get('index_from'))
+        if ($request->has('start_datetime')){
+            $orders = $orders->where('created_at', '>=', $request->get('start_datetime'));
+        }
+        if ($request->has('start_datetime')){
+            $orders = $orders->where('created_at', '>=', $request->get('start_datetime'));
+        }
+        return json_encode(
+            $orders->orderBy('created_at', 'desc')
                 ->offset($request->get('index_from'))
+                ->limit($request->get('index_to') - $request->get('index_from'))
                 ->get()
-            );
-        }
-        else if ($request->has('start_datetime')) {
-            return json_encode(Order::where([
-                ['created_at', '>=', $request->get('start_datetime')],
-                ['created_at', '<=', $request->get('end_datetime')],
-            ])
-                ->orderBy('created_at', 'desc')
-                ->offset($request->get('index_from'))
-                ->limit($request->get('index_to') - $request->get('index_from'))
-                ->get());
-        }
-        else {
-            return json_encode(Order::all());
-        }
+        );
     }
 
     public function change_step($id, Request $request){
