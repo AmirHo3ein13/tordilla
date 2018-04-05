@@ -80,25 +80,25 @@ class CustomersController extends Controller
 
     public function search(Request $request){
         $customers = DB::table('customers');
-        if ($request->get('store_name')){
+        if ($request->has('store_name')){
             $customers = $customers->where('store_name' , 'like', '%'.$request->get('store_name').'%');
         }
-        if ($request->get('code')){
+        if ($request->has('code')){
             $customers = $customers->where('code' , 'like', '%'.$request->get('code').'%');
         }
-        if ($request->get('phone')){
+        if ($request->has('phone')){
             $customers = $customers->where('phone' , 'like', '%'.$request->get('phone').'%');
         }
-        if ($request->get('city')){
+        if ($request->has('city')){
             $customers = $customers->where('city' , 'like', '%'.$request->get('city').'%');
         }
-        if ($request->get('longitude')){
+        if ($request->has('longitude')){
             $customers = $customers->whereBetween('longitude' , [$request->get('longitude') - 0.002, $request->get('longitude') + 0.002]);
         }
-        if ($request->get('latitude')){
+        if ($request->has('latitude')){
             $customers = $customers->whereBetween('latitude' , [$request->get('latitude') - 0.002, $request->get('latitude') + 0.002]);
         }
-        if ($request->get('index_from') and $request->get('index_to')){
+        if ($request->has('index_from') and $request->has('index_to')){
             $customers = $customers->offset($request->get('index_from'))
                 ->limit($request->get('index_to') - $request->get('index_from'));
         }
