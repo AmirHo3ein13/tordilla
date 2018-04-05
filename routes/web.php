@@ -46,7 +46,7 @@ Route::post('/product-category/delete/{id}', 'ProductCategoriesController@delete
 Route::post('/accountant/add', 'AccountantsController@add')->middleware('login', 'admin');
 Route::post('/accountant/get/{id?}', 'AccountantsController@get')->middleware('login');
 Route::post('/accountant/update/{id}', 'AccountantsController@update')->middleware('login', 'admin');
-Route::post('/accountant/delete{id}', 'AccountantsController@delete')->middleware('login', 'admin');
+Route::post('/accountant/delete/{id}', 'AccountantsController@delete')->middleware('login', 'admin');
 
 Route::post('/order/add', 'OrdersController@add')->middleware('login');
 Route::post('/order/get/{id?}', 'OrdersController@get')->middleware('login');
