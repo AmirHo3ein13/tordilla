@@ -66,10 +66,11 @@ class OrdersController extends Controller
             $orders = $orders->where('created_at', '>=', $request->get('start_datetime'));
         }
         return json_encode(
-            $orders->sortByDesc('created_at')
-                ->offset($request->get('index_from'))
-                ->limit($request->get('index_to') - $request->get('index_from'))
-                ->get()
+            $orders
+                ->slice($request->get('index_from'))
+                ->sortByDesc('created_at')
+                ->take($request->get('index_to') - $request->get('index_from'))
+                ->all()
         );
     }
 
