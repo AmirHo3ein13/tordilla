@@ -66,7 +66,7 @@ class OrdersController extends Controller
             $orders = $orders->where('created_at', '>=', $request->get('start_datetime'));
         }
         return json_encode(
-            $orders->orderBy('created_at', 'desc')
+            $orders->sortByDesc('created_at')
                 ->offset($request->get('index_from'))
                 ->limit($request->get('index_to') - $request->get('index_from'))
                 ->get()
