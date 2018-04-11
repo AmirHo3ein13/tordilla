@@ -36,7 +36,7 @@ class ProductsController extends Controller
     }
 
     public function get_image_path($folder, $filename){
-        return response()->file(public_path('storage/'.explode('\\', $folder)[0].'\\/'.$filename));
+        return response()->file(public_path('storage/'.explode('\\', $folder)[0].'/'.$filename));
     }
 
     public function update($id, Request $request){

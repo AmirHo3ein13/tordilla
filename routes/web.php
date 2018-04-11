@@ -36,7 +36,7 @@ Route::post('/product/update/{id}', 'ProductsController@update')->middleware('lo
 Route::post('/product/edit/inventory/{id}', 'ProductsController@edit_inventory')->middleware('login');
 Route::post('/product/edit/reservation_inventory/{id}', 'ProductsController@edit_reservation_inventory')->middleware('login');
 Route::post('/product/get_image/{id}', 'ProductsController@get_image')->middleware('login');
-Route::get('/product/image_path/{folder}/{filename}', 'ProductsController@get_image_path')->middleware('login');
+Route::post('/product/image_path/image_path/{folder}/{filename}', 'ProductsController@get_image_path')->middleware('login');
 
 Route::post('/product-category/add', 'ProductCategoriesController@add')->middleware('login', 'admin');
 Route::post('/product-category/get/{id?}', 'ProductCategoriesController@get')->middleware('login');
@@ -75,3 +75,5 @@ Route::post('/driver/delete/{id}', 'DriversController@delete')->middleware( 'log
 Route::post('/driver/update/{id}', 'DriversController@update')->middleware( 'login', 'admin');
 
 Route::post('/test', 'TestController@test');
+
+//Route::post('/city/get/{id?}', 'CitiesController@index')->middleware('login');
