@@ -36,7 +36,7 @@ Route::post('/product/update/{id}', 'ProductsController@update')->middleware('lo
 Route::post('/product/edit/inventory/{id}', 'ProductsController@edit_inventory')->middleware('login');
 Route::post('/product/edit/reservation_inventory/{id}', 'ProductsController@edit_reservation_inventory')->middleware('login');
 Route::post('/product/get_image/{id}', 'ProductsController@get_image')->middleware('login');
-Route::post('/product/image_path/image_path/{folder}/{filename}', 'ProductsController@get_image_path')->middleware('login');
+Route::post('/product/image_path/{folder}/{filename}', 'ProductsController@get_image_path')->middleware('login');
 
 Route::post('/product-category/add', 'ProductCategoriesController@add')->middleware('login', 'admin');
 Route::post('/product-category/get/{id?}', 'ProductCategoriesController@get')->middleware('login');
@@ -67,6 +67,7 @@ Route::post('/customer/location/add', 'CustomersController@add_location')->middl
 Route::post('/customer/update/{id}', 'CustomersController@update')->middleware('login');
 Route::post('/customer/delete/{id}', 'CustomersController@delete')->middleware('login');
 Route::post('/customer/search', 'CustomersController@search')->middleware('login');
+Route::post('/customer/map', 'CustomersController@search_on_map')->middleware('login');
 //Route::post('/customer/add-data', 'CustomersController@load')->middleware('login', 'admin');
 
 Route::post('/driver/add', 'DriversController@add')->middleware('login', 'admin');

@@ -104,4 +104,15 @@ class CustomersController extends Controller
         }
         return json_encode($customers->get());
     }
+
+    public function search_on_map(Request $request){
+        $customers = DB::table('customers');
+        if ($request->has('longitude')){
+            $customers = $customers->whereBetween('longitude' , [$request->get('longitude') - $request->get('radius'), $request->get('longitude') + $request->get('radius')]);
+        }
+        if ($request->has('latitude')){
+            $customers = $customers->whereBetween('latitude' , [$request->get('latitude') - $request->get('radius'), $request->get('latitude') + $request->get('radius')]);
+        }
+        return json_encode($customers->get());
+    }
 }
