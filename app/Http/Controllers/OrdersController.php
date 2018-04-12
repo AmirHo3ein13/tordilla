@@ -123,6 +123,10 @@ class OrdersController extends Controller
             else
                 abort(500);
         }
+        elseif ($order->step == 2){
+            $order->step++;
+            $order->save();
+        }
         return json_encode(true);
     }
 
