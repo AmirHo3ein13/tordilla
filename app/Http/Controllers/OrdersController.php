@@ -65,6 +65,10 @@ class OrdersController extends Controller
         if ($request->has('start_datetime')){
             $orders = $orders->where('created_at', '>=', $request->get('start_datetime'));
         }
+        foreach ($orders as $order){
+            $order->customer;
+            $order->marketer;
+        }
         return json_encode(
             $orders
                 ->slice($request->get('index_from'))

@@ -22,11 +22,11 @@ class Order extends Model
     protected $table = 'orders';
 
     public function customer(){
-        return $this->hasOne(Customer::class);
+        return $this->belongsTo(Customer::class);
     }
 
     public function marketer(){
-        return $this->hasOne(Marketer::class);
+        return $this->belongsTo(Marketer::class);
     }
 
     public function driver(){
