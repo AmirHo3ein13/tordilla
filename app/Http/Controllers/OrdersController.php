@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,11 +15,13 @@ class OrdersController extends Controller
      * @return mixed
      */
     public function add(Request $request){
+        $order_details = $request->get('order_details');
+        $this->order_detail($order_details);
         return json_encode(
             Order::create([
                 'customer_id' => $request->get('customer_id'),
                 'marketer_id' => $request->get('marketer_id'),
-                'order_details' => $request->get('order_details'),
+                'order_details' => $order_details,
                 'amount' => $request->get('amount'),
                 'discount' => $request->get('discount'),
                 'submit_date' => $request->get('submit_date'),
@@ -26,6 +29,28 @@ class OrdersController extends Controller
                 'longitude' => $request->has('longitude') ? $request->get('longitude') : null,
             ])
         );
+    }
+
+    private function order_detail($detail){
+        $orders = explode('|', $detail);
+        foreach ($orders as $order){
+            $id_number = explode(':', $order)[0];
+            $id = $id_number[0];
+            $box_pack = explode(',',$id_number[1]);
+            $pack = $box_pack[1];
+            if (strpos($pack, 'e') != false)
+                $pack = substr($pack, 1);
+            $product = Product::findOrFail($id);
+            $pack += $box_pack[0] * $product['number_in_box'];
+            if ($product['inventory'] >= $pack){
+                $product['inventory'] -= $pack;
+                $product->save();
+            }
+            else{
+                $product['reservation_inventory'] -= $pack;
+                $product->save();
+            }
+        }
     }
 
     /**
