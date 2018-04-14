@@ -16,7 +16,7 @@ class Order extends Model
     protected $fillable = [
         'customer_id', 'marketer_id', 'order_details',
         'amount', 'discount', 'submit_datetime', 'latitude', 'longitude',
-        'step', 'driver', 'factor_number'
+        'step', 'driver', 'factor_number', 'voice', 'image', 'description',
     ];
 
     protected $table = 'orders';
