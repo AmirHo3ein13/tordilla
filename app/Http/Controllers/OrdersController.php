@@ -27,6 +27,11 @@ class OrdersController extends Controller
                 'submit_date' => $request->get('submit_date'),
                 'latitude' => $request->has('latitude') ? $request->get('latitude') : null,
                 'longitude' => $request->has('longitude') ? $request->get('longitude') : null,
+                'image' => $request->has('image') ?
+                    $request->file('image')->store('order_image') : null,
+                'voice' => $request->has('voice') ?
+                    $request->file('voice')->store('voice') : null,
+                'description' => $request->get('description'),
             ])
         );
     }
@@ -145,6 +150,11 @@ class OrdersController extends Controller
         $order->submit_date = $request->get('submit_date');
         $order->latitude = $request->has('latitude') ? $request->get('latitude') : null;
         $order->longitude = $request->has('longitude') ? $request->get('longitude') : null;
+        $order->image = $request->has('image') ?
+            $request->file('image')->store('order_image') : null;
+                $order->voice = $request->has('voice') ?
+            $request->file('voice')->store('voice') : null;
+                $order->description = $request->get('description');
 
         $order->save();
 
