@@ -37,7 +37,7 @@ class OrdersController extends Controller
     }
 
     private function order_detail($detail){
-        $orders = explode('|', $detail);
+        $orders = array_slice(explode('|', $detail), 0, -1);
         foreach ($orders as $order){
             $id_number = explode(':', $order)[0];
             $id = $id_number[0];
