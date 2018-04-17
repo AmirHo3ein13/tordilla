@@ -39,7 +39,7 @@ class OrdersController extends Controller
     private function order_detail($detail){
         $orders = array_slice(explode('|', $detail), 0, -1);
         foreach ($orders as $order){
-            $id_number = explode(':', $order)[0];
+            $id_number = explode(':', $order);
             $id = $id_number[0];
             $box_pack = explode(',',$id_number[1]);
             $pack = $box_pack[1];
