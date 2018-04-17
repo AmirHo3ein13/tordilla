@@ -101,8 +101,8 @@ class OrdersController extends Controller
         }
         return json_encode(
             $orders
-                ->slice($request->get('index_from'))
                 ->sortByDesc('created_at')
+                ->slice($request->get('index_from'))
                 ->take($request->get('index_to') - $request->get('index_from'))
                 ->values()
         );
