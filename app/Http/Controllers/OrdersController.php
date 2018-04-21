@@ -16,7 +16,7 @@ class OrdersController extends Controller
      */
     public function add(Request $request){
         $order_details = $request->get('order_details');
-        $this->order_detail($order_details);
+//        $this->order_detail($order_details);
         return json_encode(
             Order::create([
                 'customer_id' => $request->get('customer_id'),
@@ -24,7 +24,6 @@ class OrdersController extends Controller
                 'order_details' => $order_details,
                 'amount' => $request->get('amount'),
                 'discount' => $request->get('discount'),
-                'submit_date' => $request->get('submit_date'),
                 'latitude' => $request->has('latitude') ? $request->get('latitude') : null,
                 'longitude' => $request->has('longitude') ? $request->get('longitude') : null,
                 'image' => $request->has('image') ?
