@@ -44,7 +44,9 @@ class OrdersController extends Controller
             $pack = $box_pack[1];
             if (strpos($pack, 'e') != false)
                 $pack = substr($pack, 1);
-            $product = Product::findOrFail($id);
+            $product = Product::where('code', $id)->first();
+            if (!$product)
+                abort(500);
             $pack += $box_pack[0] * $product['number_in_box'];
             if ($product['inventory'] >= $pack){
                 $product['inventory'] -= $pack;
