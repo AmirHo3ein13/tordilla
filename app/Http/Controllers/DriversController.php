@@ -15,6 +15,7 @@ class DriversController extends Controller
             'status' => $request->get('status'),
             'capacity' => $request->get('capacity'),
             'phone_number' => $request->get('phone_number'),
+            'even' => $request->get('even'),
         ]);
     }
     public function get($id = -1){
@@ -37,6 +38,7 @@ class DriversController extends Controller
         $driver->status = $request->get('status');
         $driver->capacity = $request->get('capacity');
         $driver->phone_number = $request->get('phone_number');
+        $driver->even = $request->get('even');
         $driver->save();
         return json_encode($driver);
     }

@@ -15,7 +15,7 @@ class Driver extends Model
     protected $table = 'drivers';
 
     protected $fillable = [
-        'name', 'car', 'tag', 'status', 'capacity', 'phone_number'
+        'name', 'car', 'tag', 'status', 'capacity', 'phone_number', 'even'
     ];
 
     public function orders(){
