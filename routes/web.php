@@ -77,4 +77,7 @@ Route::post('/driver/update/{id}', 'DriversController@update')->middleware( 'log
 
 Route::post('/test', 'TestController@test');
 
-//Route::post('/city/get/{id?}', 'CitiesController@index')->middleware('login');
+Route::post('/city/add', 'CitiesController@store')->middleware('login', 'admin');
+Route::post('/city/get/{id?}', 'CitiesController@index')->middleware('login');
+Route::post('/city/update/{id}', 'CitiesController@update')->middleware('login', 'admin');
+Route::post('/city/delete/{id}', 'CitiesController@destroy')->middleware('login', 'admin');
