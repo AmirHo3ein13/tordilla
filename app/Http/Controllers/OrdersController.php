@@ -16,7 +16,7 @@ class OrdersController extends Controller
      */
     public function add(Request $request){
         $order_details = $request->get('order_details');
-//        $this->order_detail($order_details);
+        $this->order_detail($order_details);
         return json_encode(
             Order::create([
                 'customer_id' => $request->get('customer_id'),
