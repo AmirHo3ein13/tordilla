@@ -18,9 +18,9 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Role::findOrFail(Auth::user()['role'])->role != 'admin'){
-            abort(404);
-        }
+//        if (Role::findOrFail(Auth::user()['role'])->role != 'admin'){
+//            abort(404);
+//        }
         return $next($request);
     }
 }
