@@ -42,7 +42,8 @@ class ProductsController extends Controller
     public function update($id, Request $request){
         $product = Product::findOrFail($id);
         $product->name = $request->get('name');
-        $product->image = $request->file('image')->store('product_image');
+        if ($request->has('image'))
+            $product->image = $request->file('image')->store('product_image');
         $product->code = $request->get('code');
         $product->category_id = $request->get('category');
         $product->number_in_box = $request->get('number_in_box');
