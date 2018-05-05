@@ -148,7 +148,6 @@ class OrdersController extends Controller
         $order->order_details = $request->get('order_details');
         $order->amount = $request->get('amount');
         $order->discount = $request->get('discount');
-        $order->submit_date = $request->get('submit_date');
         $order->latitude = $request->has('latitude') ? $request->get('latitude') : null;
         $order->longitude = $request->has('longitude') ? $request->get('longitude') : null;
         $order->image = $request->has('image') ?
