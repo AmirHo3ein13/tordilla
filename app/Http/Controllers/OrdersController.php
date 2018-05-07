@@ -21,6 +21,7 @@ class OrdersController extends Controller
             Order::create([
                 'customer_id' => $request->get('customer_id'),
                 'marketer_id' => $request->get('marketer_id'),
+                'driver' => $request->get('driver'),
                 'order_details' => $order_details,
                 'amount' => $request->get('amount'),
                 'discount' => $request->get('discount'),
@@ -145,6 +146,7 @@ class OrdersController extends Controller
         $order = Order::findOrFail($id);
         $order->customer_id = $request->get('customer_id');
         $order->marketer_id = $request->get('marketer_id');
+        $order->driver = $request->get('driver');
         $order->order_details = $request->get('order_details');
         $order->amount = $request->get('amount');
         $order->discount = $request->get('discount');
