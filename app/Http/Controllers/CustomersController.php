@@ -39,12 +39,12 @@ class CustomersController extends Controller
      * @return string
      */
     public function load(Request $request){
-        $csv = Reader::createFromPath(public_path('test-Moshtariyan.csv'));
+        $csv = Reader::createFromPath(public_path('list-moshtariyan.csv'));
         $arr = array();
         foreach ($csv as $item) {
             array_push($arr, $item);
         }
-        foreach (array_slice($arr, 3) as $row){
+        foreach (array_slice($arr, 1) as $row){
             Customer::create([
                 'code' => $row[0],
                 'store_name' => $row[1],
@@ -114,5 +114,9 @@ class CustomersController extends Controller
             $customers = $customers->whereBetween('latitude' , [$request->get('latitude') - $request->get('radius'), $request->get('latitude') + $request->get('radius')]);
         }
         return json_encode($customers->get());
+    }
+
+    public function search_by_phone(Request $request){
+        return json_encode(Customer::where('phone', 'like', '%'.$request->get('phone').'%')->get());
     }
 }
