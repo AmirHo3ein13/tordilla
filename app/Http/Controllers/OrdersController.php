@@ -94,8 +94,8 @@ class OrdersController extends Controller
         if ($request->has('start_datetime')){
             $orders = $orders->where('created_at', '>=', $request->get('start_datetime'));
         }
-        if ($request->has('start_datetime')){
-            $orders = $orders->where('created_at', '>=', $request->get('start_datetime'));
+        if ($request->has('end_datetime')){
+            $orders = $orders->where('created_at', '>=', $request->get('end_datetime'));
         }
         foreach ($orders as $order){
             $order->customer;
