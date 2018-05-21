@@ -48,8 +48,8 @@ class CustomersController extends Controller
             Customer::create([
                 'code' => $row[0],
                 'store_name' => $row[1],
-                'address' => $row[2],
-                'phone' => $row[3]
+                'address' => $row[3],
+                'phone' => $row[2]
             ]);
         }
         return json_encode(true);
