@@ -16,6 +16,7 @@ class OrdersController extends Controller
      */
     public function add(Request $request){
         $order_details = $request->get('order_details');
+
         $this->order_detail($order_details);
         return json_encode(
             Order::create([
@@ -110,32 +111,32 @@ class OrdersController extends Controller
         );
     }
 
-    public function change_step($id, Request $request){
-        $order = Order::findOrFail($id);
-        if ($order->step == 0){
-            if ($request->exists('driver')){
-                $order->driver = $request->get('driver');
-                $order->step++;
-                $order->save();
-            }
-            else
-                abort(500);
-        }
-        elseif ($order->step == 1){
-            if ($request->exists('factor')){
-                $order->factor_number = $request->get('factor');
-                $order->step++;
-                $order->save();
-            }
-            else
-                abort(500);
-        }
-        elseif ($order->step == 2){
-            $order->step++;
-            $order->save();
-        }
-        return json_encode(true);
-    }
+//    public function change_step($id, Request $request){
+//        $order = Order::findOrFail($id);
+//        if ($order->step == 0){
+//            if ($request->exists('driver')){
+//                $order->driver = $request->get('driver');
+//                $order->step++;
+//                $order->save();
+//            }
+//            else
+//                abort(500);
+//        }
+//        elseif ($order->step == 1){
+//            if ($request->exists('factor')){
+//                $order->factor_number = $request->get('factor');
+//                $order->step++;
+//                $order->save();
+//            }
+//            else
+//                abort(500);
+//        }
+//        elseif ($order->step == 2){
+//            $order->step++;
+//            $order->save();
+//        }
+//        return json_encode(true);
+//    }
 
     public function delete($id){
         Order::destroy($id);
@@ -154,9 +155,17 @@ class OrdersController extends Controller
         $order->longitude = $request->has('longitude') ? $request->get('longitude') : null;
         $order->image = $request->has('image') ?
             $request->file('image')->store('order_image') : null;
-                $order->voice = $request->has('voice') ?
+        $order->voice = $request->has('voice') ?
             $request->file('voice')->store('voice') : null;
-                $order->description = $request->get('description');
+        $order->description = $request->get('description');
+        if ($request->exists('driver')){
+            $order->driver = $request->get('driver');
+            $order->step = 1;
+        }
+        elseif ($request->exists('factor')){
+            $order->factor_number = $request->get('factor');
+            $order->step = 2;
+        }
 
         $order->save();
 
