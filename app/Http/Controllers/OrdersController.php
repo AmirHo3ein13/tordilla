@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Order;
 use App\Product;
+use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
@@ -145,6 +147,10 @@ class OrdersController extends Controller
 
     public function update($id, Request $request){
         $order = Order::findOrFail($id);
+        if (Role::find(Auth::user()['role']) == 'sales manager' and
+            strtotime($order['created_at'].' + 1 day') >= time()){
+            abort(404);
+        }
         $order->customer_id = $request->get('customer_id');
         $order->marketer_id = $request->get('marketer_id');
         $order->driver = $request->get('driver');
