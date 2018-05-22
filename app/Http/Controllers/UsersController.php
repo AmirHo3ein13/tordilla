@@ -106,4 +106,23 @@ class UsersController extends Controller
         else
             return User::findOrFail($id);
     }
+
+    public function remove($id){
+        User::destroy($id);
+
+        return true;
+    }
+
+    public function update($id = -1, Request $request){
+        $user = ($id != -1) ? User::findOrFail($id) : Auth::user();
+
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->password = bcrypt($request->get('password'));
+        $user->role = $request->get('role');
+        $user->code = $request->get('code');
+        $user->first_last_name = $request->get('first_last_name');
+
+        $user->save();
+    }
 }
