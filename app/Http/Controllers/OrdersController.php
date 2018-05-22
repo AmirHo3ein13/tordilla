@@ -26,7 +26,7 @@ class OrdersController extends Controller
         return json_encode(
             Order::create([
                 'customer_id' => $request->get('customer_id'),
-                'marketer_id' => $request->get('marketer_id'),
+                'user_id' => $request->get('user_id'),
                 'driver' => $request->get('driver'),
                 'order_details' => $order_details,
                 'amount' => $request->get('amount'),
@@ -104,8 +104,8 @@ class OrdersController extends Controller
      */
     public function filter(Request $request){
         $orders = Order::all();
-        if ($request->has('marketer')){
-            $orders = $orders->where('marketer_id', '=', $request->get('marketer'));
+        if ($request->has('user_id')){
+            $orders = $orders->where('user_id', '=', $request->get('user_id'));
         }
         if ($request->has('start_datetime')){
             $orders = $orders->where('created_at', '>=', $request->get('start_datetime'));
@@ -115,7 +115,7 @@ class OrdersController extends Controller
         }
         foreach ($orders as $order){
             $order->customer;
-            $order->marketer;
+            $order->user;
         }
         return json_encode(
             $orders
@@ -178,7 +178,7 @@ class OrdersController extends Controller
             return json_encode('update date expired');
         }
         $order->customer_id = $request->get('customer_id');
-        $order->marketer_id = $request->get('marketer_id');
+        $order->user_id = $request->get('user_id');
         $order->driver = $request->get('driver');
         $order->order_details = $request->get('order_details');
         $order->amount = $request->get('amount');

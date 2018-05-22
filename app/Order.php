@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'customer_id', 'marketer_id', 'order_details',
+        'customer_id', 'user_id', 'order_details',
         'amount', 'discount', 'submit_datetime', 'latitude', 'longitude',
         'step', 'driver', 'factor_number', 'voice', 'image', 'description',
     ];
@@ -25,8 +25,8 @@ class Order extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function marketer(){
-        return $this->belongsTo(Marketer::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
     public function driver(){

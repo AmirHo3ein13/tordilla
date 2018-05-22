@@ -62,6 +62,8 @@ class UsersController extends Controller
             'email' => $request->get('email'),
             'password' => bcrypt($request->get('password')),
             'role' => $request->get('role'),
+            'phone' => $request->get('phone'),
+            'status' => $request->has('status') ? $request->get('status') : true,
         ]);
         return json_encode(true);
     }
@@ -120,6 +122,8 @@ class UsersController extends Controller
         $user->email = $request->get('email');
         $user->password = bcrypt($request->get('password'));
         $user->role = $request->get('role');
+        $user->status = $request->get('status');
+        $user->status = $request->get('phone');
         $user->code = $request->get('code');
         $user->first_last_name = $request->get('first_last_name');
 

@@ -58,10 +58,10 @@ Route::post('/order/delete/{id}', 'OrdersController@delete')->middleware('login'
 Route::post('/order/filter', 'OrdersController@filter');
 Route::post('/order/location/add', 'OrdersController@add_location')->middleware('login');
 
-Route::post('/marketer/add', 'MarketersController@add')->middleware('login', 'admin');
-Route::post('/marketer/get/{id?}', 'MarketersController@get')->middleware('login');
-Route::post('/marketer/update/{id}', 'MarketersController@update')->middleware('login', 'admin');
-Route::post('/marketer/delete/{id}', 'MarketersController@delete')->middleware('login', 'admin');
+//Route::post('/marketer/add', 'MarketersController@add')->middleware('login', 'admin');
+//Route::post('/marketer/get/{id?}', 'MarketersController@get')->middleware('login');
+//Route::post('/marketer/update/{id}', 'MarketersController@update')->middleware('login', 'admin');
+//Route::post('/marketer/delete/{id}', 'MarketersController@delete')->middleware('login', 'admin');
 
 Route::post('/customer/add', 'CustomersController@add')->middleware('login');
 Route::post('/customer/get/{id?}', 'CustomersController@get')->middleware('login');
