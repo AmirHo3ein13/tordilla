@@ -18,15 +18,18 @@ class CustomersController extends Controller
             'city' => $request->get('city'),
             'area' => $request->get('area'),
             'address' => $request->get('address'),
+            'zone' => $request->get('zone'),
             'phone' => $request->get('phone'),
         ]);
     }
+
     public function get($id = -1){
         if ($id == -1)
             return json_encode(Customer::all());
         else
             return json_encode(Customer::findOrFail($id));
     }
+
     public function add_location(Request $request){
         $customer = Customer::findOrFail($request->get('id'));
         $customer['latitude'] = $request->get('latitude');
@@ -65,6 +68,7 @@ class CustomersController extends Controller
         $customer->city = $request->get('city');
         $customer->area = $request->get('area');
         $customer->address = $request->get('address');
+        $customer->zone = $request->get('zone');
         $customer->phone = $request->get('phone');
 
         $customer->save();
