@@ -120,7 +120,8 @@ class UsersController extends Controller
 
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        $user->password = bcrypt($request->get('password'));
+        if ($request->has('password'))
+            $user->password = bcrypt($request->get('password'));
         $user->role = $request->get('role');
         $user->status = $request->get('status');
         $user->status = $request->get('phone');
