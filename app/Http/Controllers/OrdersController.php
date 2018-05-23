@@ -177,6 +177,13 @@ class OrdersController extends Controller
             $order['transmission_day'] != null){
             return json_encode('update date expired');
         }
+        if ($order->reserve and !$request->get('reserve')){
+            $order_details = $request->get('order_details');
+            $ret = $this->order_detail($order_details);
+            if (sizeof($ret) and !($request->has('reserve') and $request->get('reserve'))){
+                return json_encode(['status' => false, 'products' => $ret]);
+            }
+        }
         $order->customer_id = $request->get('customer_id');
         $order->user_id = $request->get('user_id');
         $order->driver = $request->get('driver');
