@@ -20,7 +20,6 @@ class ProductsController extends Controller
                 'price' => $request->get('price'),
                 'box_price' => $request->get('box_price'),
                 'inventory' => $request->get('inventory'),
-                'reservation_inventory' => $request->get('reservation_inventory'),
             ]),
             ProductCategory::findOrFail($request->get('category'))
         ]);
@@ -50,7 +49,6 @@ class ProductsController extends Controller
         $product->price = $request->get('price');
         $product->box_price = $request->get('box_price');
         $product->inventory = $request->get('inventory');
-        $product->reservation_inventory = $request->get('reservation_inventory');
 
         $product->save();
 
