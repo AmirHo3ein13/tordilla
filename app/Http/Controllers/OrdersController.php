@@ -199,14 +199,18 @@ class OrdersController extends Controller
             $request->file('voice')->store('voice') : null;
         $order->description = $request->get('description');
         if ($request->exists('driver')){
+            if (!$order->driver){
+                $order->transmission_day = $request->has('transmission_day') ?
+                    $request->get('transmission_day') : null;
+                $order->step = 1;
+            }
             $order->driver = $request->get('driver');
-            $order->transmission_day = $request->has('transmission_day') ?
-                $request->get('transmission_day') : null;
-            $order->step = 1;
         }
         if ($request->exists('factor')){
+            if (!$order->factor_number){
+                $order->step = 2;
+            }
             $order->factor_number = $request->get('factor');
-            $order->step = 2;
         }
 
         $order->save();
