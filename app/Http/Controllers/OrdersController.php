@@ -170,7 +170,7 @@ class OrdersController extends Controller
     public function update($id, Request $request){
         $order = Order::findOrFail($id);
         if (Role::find(Auth::user()['role']) == 'sales manager' and
-            strtotime($order['created_at'].' + 1 day') >= time()){
+            strtotime($order['created_at'].' + 1 day') <= time()){
             return json_encode('update date expired');
         }
         elseif (Role::find(Auth::user()['role']) == 'sales supervisor' and
