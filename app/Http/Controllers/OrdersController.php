@@ -104,8 +104,8 @@ class OrdersController extends Controller
      */
     public function filter(Request $request){
         $orders = Order::all();
-        if ($request->has('user_id')){
-            $orders = $orders->where('user_id', '=', $request->get('user_id'));
+        if ($request->has('marketer')){
+            $orders = $orders->where('user_id', '=', $request->get('marketer'));
         }
         if ($request->has('start_datetime')){
             $orders = $orders->where('created_at', '>=', $request->get('start_datetime').' 23:59:59');
