@@ -199,10 +199,10 @@ class OrdersController extends Controller
         $order->description = $request->get('description');
         if ($request->exists('driver')){
             if (!$order->driver){
-                $order->transmission_day = $request->has('transmission_day') ?
-                    $request->get('transmission_day') : null;
                 $order->step = 1;
             }
+            $order->transmission_day = $request->has('transmission_day') ?
+                $request->get('transmission_day') : null;
             $order->driver = $request->get('driver');
         }
         if ($request->exists('factor')){
