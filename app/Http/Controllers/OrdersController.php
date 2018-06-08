@@ -186,7 +186,6 @@ class OrdersController extends Controller
         }
         $order->customer_id = $request->get('customer_id');
         $order->user_id = $request->get('user_id');
-        $order->driver = $request->get('driver');
         $order->order_details = $request->get('order_details');
         $order->amount = $request->get('amount');
         $order->discount = $request->get('discount');
