@@ -13,7 +13,8 @@ class ProductsController extends Controller
         return json_encode([
             Product::create([
                 'name' => $request->get('name'),
-                'image' => $request->file('image')->store('product_image'),
+                'image' => $request->has('image') ?
+                    $request->file('image')->store('product_image') : null,
                 'code' => $request->get('code'),
                 'category_id' => $request->get('category'),
                 'number_in_box' => $request->get('number_in_box'),
