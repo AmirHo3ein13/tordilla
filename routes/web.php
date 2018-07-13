@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/sign-in', 'UsersController@sign_in');
 Route::post('/sign-up', 'UsersController@register')->middleware('admin');
 Route::post('/user/remove/{id}', 'UsersController@remove')->middleware('admin');
-Route::post('/user/update', 'UsersController@update')->middleware('admin');
+Route::post('/user/update/{id?}', 'UsersController@update')->middleware('admin');
 Route::post('/sign-out', 'UsersController@sign_out');
 Route::post('/user/get/{id?}', 'UsersController@get')->middleware('admin');
 //Route::post('/user/add-data', 'UsersController@load')->middleware('admin');

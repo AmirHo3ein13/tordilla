@@ -106,13 +106,13 @@ class UsersController extends Controller
             return User::all();
         }
         else
-            return User::findOrFail($id);
+            return json_encode(User::findOrFail($id));
     }
 
     public function remove($id){
         User::destroy($id);
 
-        return true;
+        return json_encode(true);
     }
 
     public function update($id = -1, Request $request){
@@ -129,5 +129,7 @@ class UsersController extends Controller
         $user->first_last_name = $request->get('first_last_name');
 
         $user->save();
+
+        return json_encode($user);
     }
 }
