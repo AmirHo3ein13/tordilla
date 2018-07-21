@@ -111,11 +111,30 @@ class CustomersController extends Controller
 
     public function search_on_map(Request $request){
         $customers = DB::table('customers');
+        $radius_from = $request->has('radius_from') ? $request->get('radius_from') : 0;
         if ($request->has('longitude')){
-            $customers = $customers->whereBetween('longitude' , [$request->get('longitude') - $request->get('radius'), $request->get('longitude') + $request->get('radius')]);
+            if ($radius_from != 0)
+                $customers = $customers->whereBetween('longitude' , [$request->get('longitude') - $request->get('radius'), $request->get('longitude') + $request->get('radius')]);
+            else
+                $customers = $customers
+                    ->whereBetween('longitude' ,
+                        [$request->get('longitude') + $radius_from, $request->get('longitude') + $request->get('radius')])
+                    ->orWhereBetween('longitude' ,
+                        [$request->get('longitude') - $request->get('radius'), $request->get('longitude') - $radius_from]);
         }
         if ($request->has('latitude')){
-            $customers = $customers->whereBetween('latitude' , [$request->get('latitude') - $request->get('radius'), $request->get('latitude') + $request->get('radius')]);
+            if ($radius_from != 0)
+                $customers = $customers->whereBetween('latitude' , [$request->get('latitude') - $request->get('radius'), $request->get('latitude') + $request->get('radius')]);
+            else
+                $customers = $customers
+                    ->whereBetween('latitude' ,
+                        [$request->get('latitude') + $radius_from, $request->get('latitude') + $request->get('radius')])
+                    ->orWhereBetween('latitude' ,
+                        [$request->get('latitude') - $request->get('radius'), $request->get('latitude') - $radius_from]);
+        }
+        if ($request->has('index_from') and $request->has('index_to')){
+            $customers = $customers->offset($request->get('index_from'))
+                ->limit($request->get('index_to') - $request->get('index_from'));
         }
         return json_encode($customers->get());
     }
