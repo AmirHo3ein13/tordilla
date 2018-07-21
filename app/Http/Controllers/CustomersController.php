@@ -113,7 +113,7 @@ class CustomersController extends Controller
         $customers = DB::table('customers');
         $radius_from = $request->has('radius_from') ? $request->get('radius_from') : 0;
         if ($request->has('longitude')){
-            if ($radius_from != 0)
+            if ($radius_from == 0)
                 $customers = $customers->whereBetween('longitude' , [$request->get('longitude') - $request->get('radius'), $request->get('longitude') + $request->get('radius')]);
             else
                 $customers = $customers
@@ -123,7 +123,7 @@ class CustomersController extends Controller
                         [$request->get('longitude') - $request->get('radius'), $request->get('longitude') - $radius_from]);
         }
         if ($request->has('latitude')){
-            if ($radius_from != 0)
+            if ($radius_from == 0)
                 $customers = $customers->whereBetween('latitude' , [$request->get('latitude') - $request->get('radius'), $request->get('latitude') + $request->get('radius')]);
             else
                 $customers = $customers
