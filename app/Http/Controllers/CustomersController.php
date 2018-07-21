@@ -117,20 +117,24 @@ class CustomersController extends Controller
                 $customers = $customers->whereBetween('longitude' , [$request->get('longitude') - $request->get('radius'), $request->get('longitude') + $request->get('radius')]);
             else
                 $customers = $customers
-                    ->whereBetween('longitude' ,
-                        [$request->get('longitude') + $radius_from, $request->get('longitude') + $request->get('radius')])
-                    ->orWhereBetween('longitude' ,
-                        [$request->get('longitude') - $request->get('radius'), $request->get('longitude') - $radius_from]);
+                    ->where(function ($query) use ($request, $radius_from) {
+                       $query->whereBetween('longitude',
+                            [$request->get('longitude') + $radius_from, $request->get('longitude') + $request->get('radius')])
+                            ->orWhereBetween('longitude',
+                                [$request->get('longitude') - $request->get('radius'), $request->get('longitude') - $radius_from]);
+                    });
         }
         if ($request->has('latitude')){
             if ($radius_from == 0)
                 $customers = $customers->whereBetween('latitude' , [$request->get('latitude') - $request->get('radius'), $request->get('latitude') + $request->get('radius')]);
             else
-                $customers = $customers
-                    ->whereBetween('latitude' ,
-                        [$request->get('latitude') + $radius_from, $request->get('latitude') + $request->get('radius')])
-                    ->orWhereBetween('latitude' ,
-                        [$request->get('latitude') - $request->get('radius'), $request->get('latitude') - $radius_from]);
+                $customers = $customers->where(function ($query) use ($request, $radius_from){
+                        $query->whereBetween('latitude' ,
+                            [$request->get('latitude') + $radius_from, $request->get('latitude') + $request->get('radius')])
+                            ->orWhereBetween('latitude' ,
+                                [$request->get('latitude') - $request->get('radius'), $request->get('latitude') - $radius_from]);
+                    });
+
         }
         if ($request->has('index_from') and $request->has('index_to')){
             $customers = $customers->offset($request->get('index_from'))
