@@ -109,10 +109,10 @@ class OrdersController extends Controller
             $orders = $orders->where('user_id', '=', $request->get('marketer'));
         }
         if ($request->has('start_datetime')){
-            $orders = $orders->where('created_at', '>=', $request->get('start_datetime').' 00:00:00');
+            $orders = $orders->where('created_at', '>=', convertToEnNumber($request->get('start_datetime')).' 00:00:00');
         }
         if ($request->has('end_datetime')){
-            $orders = $orders->where('created_at', '<=', $request->get('end_datetime').' 23:59:59');
+            $orders = $orders->where('created_at', '<=', convertToEnNumber($request->get('end_datetime')).' 23:59:59');
         }
         foreach ($orders as $order){
             $order->customer;
