@@ -57,10 +57,12 @@ class UsersController extends Controller
      * @return string
      */
     public function register(Request $request){
+        $password = Auth()->check() and Auth()->user()->role == 'admin' and !$request->has('password') ?
+            $request->get('phone') : $request->get('password');
         User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
-            'password' => bcrypt($request->get('password')),
+            'password' => bcrypt($password),
             'role' => $request->get('role'),
             'phone' => $request->get('phone'),
             'status' => $request->has('status') ? $request->get('status') : true,
