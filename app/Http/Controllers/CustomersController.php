@@ -20,6 +20,7 @@ class CustomersController extends Controller
             'address' => $request->get('address'),
             'zone' => $request->get('zone'),
             'phone' => $request->get('phone'),
+            'traffic_role' => $request->has('traffic_role') ? $request->get('traffic_role') : null,
         ]);
     }
 
@@ -70,6 +71,7 @@ class CustomersController extends Controller
         $customer->address = $request->get('address');
         $customer->zone = $request->get('zone');
         $customer->phone = $request->get('phone');
+        $customer->phone = $request->has('traffic_role') ? $request->get('traffic_role') : null;
 
         $customer->save();
 
