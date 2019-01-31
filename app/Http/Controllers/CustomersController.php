@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Imports\CustomersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use League\Csv\Reader;
+use Maatwebsite\Excel\Facades\Excel as Excel;
 
 class CustomersController extends Controller
 {
@@ -147,5 +149,13 @@ class CustomersController extends Controller
 
     public function search_by_phone(Request $request){
         return json_encode(Customer::where('phone', 'like', '%'.$request->get('phone').'%')->get());
+    }
+
+    public function import(Request $request) {
+        $file_name = $request->file('file')->store('','public');
+
+        $a = Excel::import(new CustomersImport, $file_name);
+
+        return response()->json(true);
     }
 }
