@@ -158,4 +158,17 @@ class CustomersController extends Controller
 
         return response()->json(true);
     }
+
+    public function getTrafficRoles() {
+        return json_encode(DB::table('traffic_role')->get());
+    }
+
+    public function addTrafficRole(Request $request) {
+        $tr = DB::table('traffic_role')->insert([
+            'name' => $request->get('name'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        return json_encode($tr);
+    }
 }
