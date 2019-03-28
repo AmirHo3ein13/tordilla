@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
-use App\Imports\CustomersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use League\Csv\Reader;
-use Maatwebsite\Excel\Facades\Excel as Excel;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class CustomersController extends Controller
 {
@@ -154,7 +153,21 @@ class CustomersController extends Controller
     public function import(Request $request) {
         $file_name = $request->file('file')->store('','public');
 
-        $a = Excel::import(new CustomersImport, $file_name);
+        try {
+            $collection = (new FastExcel)->import('storage/' . $file_name);
+        } catch (\Exception $e) {
+            return response()->json('File not Found');
+        }
+        foreach ($collection as $item) {
+            if ($item['عنوان']) {
+                Customer::create([
+                    'store_name' => $item['عنوان'],
+                    'address' => $item['آدرس'],
+                    'code' => $item['کد'],
+                    'phone' => $item['تلفن'],
+                ]);
+            }
+        }
 
         return response()->json(true);
     }

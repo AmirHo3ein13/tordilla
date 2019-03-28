@@ -71,7 +71,7 @@ Route::post('/customer/delete/{id}', 'CustomersController@delete')->middleware('
 Route::post('/customer/search', 'CustomersController@search')->middleware('login');
 Route::post('/customer/map', 'CustomersController@search_on_map')->middleware('login');
 Route::post('/customer/search_phone', 'CustomersController@search_by_phone')->middleware('login');
-Route::post('/customer/import', 'CustomersController@import');
+Route::get('/customer/import', 'CustomersController@import')->middleware('login', 'admin');
 Route::post('/customer/add-traffic-role', 'CustomersController@addTrafficRole')->middleware('login', 'admin');
 Route::get('/customer/traffic-roles', 'CustomersController@getTrafficRoles');
 //Route::post('/customer/add-data', 'CustomersController@load')->middleware('login', 'admin');
